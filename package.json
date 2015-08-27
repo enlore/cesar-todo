@@ -1,0 +1,27 @@
+{
+  "name": "cognitionAdventure",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DarkMarmot/cognitionAdventure.git"
+  },
+  "author": "Scott Southworth <scott.southworth@gmail.com> (https://twitter.com/DarkMarmot)",
+  "license": "Apache V2",
+  "bugs": {
+    "url": "https://github.com/DarkMarmot/cognitionAdventure/issues"
+  },
+  "homepage": "https://github.com/DarkMarmot/cognitionAdventure",
+  "devDependencies": {
+    "catbus": "^1.1.2",
+    "express": "^4.13.3",
+    "jquery": "^2.1.4"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
