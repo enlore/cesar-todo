@@ -446,7 +446,7 @@
             build: extractString(sel, 'build', 'append'), // scratch, append, sort
             order: extractBool(sel, 'order'), // will use flex order css
             depth: extractBool(sel, 'depth'), // will use z-index
-            target: extractString(sel, "id,find")
+            target: extractString(sel, "node,id,find")
 
         };
 

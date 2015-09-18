@@ -1,0 +1,39 @@
+<blueprint>
+    <sensor watch="itemData" run="render" auto="true" />
+    <sensor node="cb" on="click" run="toggleDone" />
+    <prop find="itemData" />
+</blueprint>
+
+<script>
+
+    $.cog({
+
+        render: function(item){
+
+            this.desc.text(item.desc);
+            this.cb.prop('checked', item.done);
+            this.desc.css(item.done ? {color: 'red'} : {color: 'blue'});
+        },
+
+        toggleDone: function(ev){
+
+            var item = this.itemData.read();
+            item.done = !item.done;
+            this.itemData.write(item);
+
+        }
+
+    });
+
+</script>
+
+
+
+<display>
+
+    <li>
+        <input id="cb" type="checkbox" />
+        <span id="desc"></span>
+    </li>
+
+</display>

@@ -1,7 +1,45 @@
+<blueprint>
+    <data name="todoItemList" prop="true" />
+    <sensor watch="todoItemList" run="renderList" auto="true" />
+    <cog node="listHolder" url="list.html" />
+</blueprint>
+
+<script>
+
+    $.cog({
+
+        meow: 'meowing!',
+
+        init: function(){
+
+            var list = [];
+
+            list.push({id: 1, desc: 'bunny', done: true});
+            list.push({id: 2, desc: 'kitten', done: false});
+            list.push({id: 3, desc: 'cow', done: true});
+
+            this.todoItemList.write(list);
+
+        },
+
+        renderList: function(msg){
+            console.log('called with:', msg);
+            console.log('called with:' + msg);
+        }
+
+    });
+
+</script>
+
+
+
 <display>
 
     <div>
-        meow meow meow
+        this is the app cog
+        <div id="listHolder">
+
+        </div>
     </div>
 
 </display>
