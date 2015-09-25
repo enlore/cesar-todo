@@ -1,12 +1,43 @@
 <blueprint>
+
     <data name="todoItemList" prop="true" />
     <sensor watch="todoItemList" run="renderList" auto="true" />
+
+    <data name="cmd_AddTodo" />
+
+    <sensor watch="cmd_AddTodo" run="addTodo" />
+
+    <cog node="header" url="header.html" />
     <cog node="listHolder" url="list.html" />
+
 </blueprint>
+
+<display>
+
+    <div>
+        Title of This
+        <div id="header" ></div>
+        <div id="listHolder"></div>
+    </div>
+
+</display>
 
 <script>
 
     $.cog({
+
+        uid: 3,
+
+        addTodo: function(msg){
+
+            var list = this.todoItemList.read();
+            var todo = {id: ++(this.uid), desc: msg, done: false};
+
+            list.push(todo);
+
+            this.todoItemList.write(list);
+
+        },
 
         meow: 'meowing!',
 
@@ -33,13 +64,3 @@
 
 
 
-<display>
-
-    <div>
-        this is the app cog
-        <div id="listHolder">
-
-        </div>
-    </div>
-
-</display>

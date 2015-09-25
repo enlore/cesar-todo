@@ -1,0 +1,33 @@
+
+<blueprint>
+    <sensor node="inputField" on="keypress" filter="isEnter" transform="toInput" pipe="cmd_AddTodo" />
+    <sensor watch="cmd_AddTodo" run="clearInput" />
+</blueprint>
+
+
+<display>
+    <div>
+        <input id="inputField" placeholder="What needs to be done?" autofocus>
+    </div>
+</display>
+
+
+<script>
+
+    $.cog({
+
+        isEnter: function(ev){
+            return (ev.which === 13);
+        },
+
+        toInput: function(){
+            return this.inputField.val();
+        },
+
+        clearInput: function(){
+                this.inputField.val('');
+        }
+
+    })
+
+</script>
