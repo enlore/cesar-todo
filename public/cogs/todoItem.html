@@ -1,7 +1,10 @@
 <blueprint>
     <sensor watch="itemData" run="render" auto="true" />
     <sensor node="cb" on="click" run="toggleDone" />
+    <sensor node="delete" on="click" run="deleteItem" />
     <prop find="itemData" />
+    <prop find="deleteThisItem" />
+
 </blueprint>
 
 <script>
@@ -21,7 +24,11 @@
             item.done = !item.done;
             this.itemData.write(item);
 
+        },
+        deleteItem: function(ev){
+            this.deleteThisItem.write(this.itemData.read())
         }
+
 
     });
 
@@ -34,6 +41,8 @@
     <li>
         <input id="cb" type="checkbox" />
         <span id="desc"></span>
+        <button id="delete">Del</button>
+
     </li>
 
 </display>

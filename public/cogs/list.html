@@ -1,11 +1,23 @@
 <blueprint>
-    <chain find="holder" url="todoItem.html" source="data todoItemList" item="data itemData" />
+    <chain find="holder" url="todoItem.html" source="data viewTodoItemList" item="data itemData" />
+    <sensor node="done" on="click" run="DoneItem" />
+    <sensor node="notDone" on="click" run="NotDoneItem" />
+    <prop find="filterItemDone" />
+    <prop find="filterItemNotDone" />
+    <prop find="cmd_Filter" />
 </blueprint>
 
 <script>
 
     $.cog({
+        DoneItem: function(ev){
+            this.cmd_Filter.write("done");
 
+        },
+        NotDoneItem: function(ev){
+            this.cmd_Filter.write("not done");
+
+        }
 
     });
 
@@ -14,10 +26,13 @@
 
 
 <display>
+    <div style="border: solid 1px red; width: 400px; ">
+        <ul id="holder">
 
-<div style="border: solid 1px red; width: 200px; ">
-    <ul id="holder">
-
-    </ul>
-</div>
+        </ul>
+    </div>
+    <div>
+        <button id="done">Done</button>
+        <button id="notDone">Not Done</button>
+    </div>
 </display>

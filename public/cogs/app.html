@@ -1,11 +1,20 @@
 <blueprint>
 
     <data name="todoItemList" prop="true" />
-    <sensor watch="todoItemList" run="renderList" auto="true" />
-
+    <data name="workingTodoItemList" prop="true" />
+    <data name="viewTodoItemList" prop="true" />
+    <data name="deleteThisItem" prop="true" />
+    <data name="filterItemDone" prop="true" />
+    <data name="filterItemNotDone" prop="true" />
+    <sensor watch="todoItemList" pipe="workingTodoItemList" auto="true" />
+    <sensor watch="workingTodoItemList" pipe="viewTodoItemList" auto="true" />
+    <sensor watch="viewTodoItemList" run="renderList" auto="true" />
     <data name="cmd_AddTodo" />
+    <data name="cmd_Filter" />
 
     <sensor watch="cmd_AddTodo" run="addTodo" />
+    <sensor watch="cmd_Filter" run="cmd_filterTodo" />
+    <sensor watch="deleteThisItem" run="cmd_DeleteItem" auto="true" />
 
     <cog node="header" url="header.html" />
     <cog node="listHolder" url="list.html" />
@@ -56,6 +65,24 @@
         renderList: function(msg){
             console.log('called with:', msg);
             console.log('called with:' + msg);
+        },
+        cmd_DeleteItem: function(itemData){
+            var itemDataList = this.todoItemList.read();
+            itemDataList.forEach(function(todoItem, index){
+                if (itemData.id === todoItem.id)
+                {
+                    itemDataList.splice(index, 1);
+                }
+             } )
+            this.todoItemList.write(itemDataList);
+        },
+
+        cmd_filterTodo: function(msg){
+            var itemDataList = this.workingTodoItemList.read();
+            var filteredItemDataList = itemDataList.filter(function filterDataItem(todoItem){
+                return todoItem.done;
+            })
+            this.workingTodoItemList.write(filteredItemDataList);
         }
 
     });
